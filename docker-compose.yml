@@ -1,0 +1,7 @@
+version: '3'
+services:
+  web:
+    image: istresearch/scrapy-cluster:kafka-monitor-1.2.1
+    build:
+      context: .
+      dockerfile: docker/kafka-monitor/Dockerfile
