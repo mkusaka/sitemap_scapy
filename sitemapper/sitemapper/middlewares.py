@@ -6,8 +6,7 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-
-
+import re
 class SitemapperSpiderMiddleware(object):
     # Not all methods need to be defined. If a method is not defined,
     # scrapy acts as if the spider middleware does not modify the
@@ -50,7 +49,18 @@ class SitemapperSpiderMiddleware(object):
 
         # Must return only requests (not items).
         for r in start_requests:
+            print("foo bar baz" + r.url)
             yield r
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class MyCustomDownloaderMiddleware(object):
+
+    def process_request(self, request, spider):
+        if (not re.match(r'http:\/\/wired', request.url)):
+            print(request.url)
+            return request.replace(url=request.url.replace("https", "http"))
+        else:
+            return None

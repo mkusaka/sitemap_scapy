@@ -13,9 +13,12 @@ class SitemapSpider(ParentSitemapSpider):
 
     sitemap_rules = [(r'/2019/04/', 'parse')]
 
-    def start_requests(self):
-        requests = list(map(lambda x:x.replace('https://wired.jp', 'http://wired.jp'), list(super(SitemapSpider, self).start_requests())))
-        return requests
+    # def start_requests(self):
+    #     requests = list(map(lambda x:x.replace(url=x.url.replace("https://", "http://")) ,list(super(SitemapSpider, self).start_requests())))
+    #     for request in requests:
+    #         print(request.url)
+    #         # request.replace(url="https://www.google.co.jp/")
+    #     return requests
 
     def parse(self, response):
         i = {}
