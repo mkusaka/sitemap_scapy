@@ -8,6 +8,9 @@ services:
       - tail
       - -f
       - /dev/null
-      # - logvolume01:/var/log
-# volumes:
-#   volume:
+    links:
+      - redis:localhos
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
